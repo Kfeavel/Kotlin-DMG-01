@@ -1,7 +1,5 @@
-package gameboy
+package gameboy.cpu
 
-import gameboy.cpu.Flags
-import gameboy.cpu.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

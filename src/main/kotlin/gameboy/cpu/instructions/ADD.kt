@@ -5,8 +5,15 @@ import gameboy.cpu.Registers
 data class ADD(val target: ArithmeticTarget) : Instruction<ArithmeticTarget>() {
     private fun overflowingAdd(registers: Registers, value: UByte): UByte {
         return registers.a.plus(value).toUByte().also { newValue ->
-            val didOverflow = (newValue < value)
-            // TODO: Handle overflow
+            registers.f.apply {
+                zero = (newValue.toUInt() == 0u)
+                subtract = false
+                // Half Carry is set if adding the lower nibbles of the value and register A
+                // together result in a value bigger than 0xF. If the result is larger than 0xF
+                // than the addition caused a carry from the lower nibble to the upper nibble.
+                halfCarry = ((registers.a and 0xFu) + (value and 0xFu) > 0xFu)
+                carry = (newValue < value)
+            }
         }
     }
 
