@@ -21,14 +21,14 @@ data class Registers(
 
     var af: UShort
         get() = readUShort(a, f.toUByte())
-        set(value) = writeUShort(value, { x -> a = x }, { x -> f = Flags(x) })
+        set(value) = writeUShort(value, this::a::set) { x -> f = Flags(x) }
     var bc: UShort
         get() = readUShort(b, c)
-        set(value) = writeUShort(value, { x -> b = x }, { x -> c = x })
+        set(value) = writeUShort(value, this::b::set, this::c::set)
     var de: UShort
         get() = readUShort(d, e)
-        set(value) = writeUShort(value, { x -> d = x }, { x -> e = x })
+        set(value) = writeUShort(value, this::d::set, this::e::set)
     var hl: UShort
         get() = readUShort(h, l)
-        set(value) = writeUShort(value, { x -> h = x }, { x -> l = x })
+        set(value) = writeUShort(value, this::h::set, this::l::set)
 }
