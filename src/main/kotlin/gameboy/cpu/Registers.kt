@@ -1,14 +1,14 @@
 package gameboy.cpu
 
 data class Registers(
-    var a: UByte,
-    var b: UByte,
-    var c: UByte,
-    var d: UByte,
-    var e: UByte,
-    var f: Flags,
-    var h: UByte,
-    var l: UByte,
+    var a: UByte = 0u,
+    var b: UByte = 0u,
+    var c: UByte = 0u,
+    var d: UByte = 0u,
+    var e: UByte = 0u,
+    var f: Flags = Flags(),
+    var h: UByte = 0u,
+    var l: UByte = 0u,
 ) {
     private fun readUShort(x: UByte, y: UByte): UShort {
         return ((x.toInt() shl 8).toUShort() or y.toUShort())

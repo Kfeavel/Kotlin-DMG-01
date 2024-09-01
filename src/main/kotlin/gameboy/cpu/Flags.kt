@@ -1,10 +1,10 @@
 package gameboy.cpu
 
 data class Flags(
-    val zero: Boolean,
-    val subtract: Boolean,
-    val halfCarry: Boolean,
-    val carry: Boolean
+    val zero: Boolean = false,
+    val subtract: Boolean = false,
+    val halfCarry: Boolean = false,
+    val carry: Boolean = false,
 ) {
     companion object {
         const val ZERO_FLAG_BYTE_POSITION = 7
