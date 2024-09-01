@@ -10,18 +10,18 @@ data class Registers(
     var h: UByte = 0u,
     var l: UByte = 0u,
 ) {
-    private fun readUShort(x: UByte, y: UByte): UShort {
-        return ((x.toInt() shl 8).toUShort() or y.toUShort())
+    private fun readUShort(high: UByte, low: UByte): UShort {
+        return ((high.toInt() shl 8).toUShort() or low.toUShort())
     }
 
-    private fun writeUShort(value: UShort, x: (UByte) -> Unit, y: (UByte) -> Unit) {
-        x((value.toInt() and 0xFF00 shr 8).toUByte())
-        y((value.toInt() and 0x00FF).toUByte())
+    private fun writeUShort(value: UShort, high: (UByte) -> Unit, low: (UByte) -> Unit) {
+        high((value.toInt() and 0xFF00 shr 8).toUByte())
+        low((value.toInt() and 0x00FF).toUByte())
     }
 
     var af: UShort
         get() = readUShort(a, f.toUByte())
-        set(value) = writeUShort(value, this::a::set) { x -> f = Flags(x) }
+        set(value) = writeUShort(value, this::a::set, ::Flags)
     var bc: UShort
         get() = readUShort(b, c)
         set(value) = writeUShort(value, this::b::set, this::c::set)
