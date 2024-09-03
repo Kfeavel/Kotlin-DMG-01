@@ -12,7 +12,7 @@ class TestADDR8 {
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            ADDr8(registers = this, source = R8.B).execute()
+            ADDr8(registers = this, target = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
@@ -23,7 +23,7 @@ class TestADDR8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADDr8(registers = this, source = R8.B).execute()
+            ADDr8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -34,7 +34,7 @@ class TestADDR8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADDr8(registers = this, source = R8.B).execute()
+            ADDr8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -45,7 +45,7 @@ class TestADDR8 {
             a = 0x0Fu,
             b = 0x0Fu
         ).apply {
-            ADDr8(registers = this, source = R8.B).execute()
+            ADDr8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -56,7 +56,7 @@ class TestADDR8 {
             a = 0xFFu,
             c = 0x01u
         ).apply {
-            ADDr8(registers = this, source = R8.C).execute()
+            ADDr8(registers = this, target = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }

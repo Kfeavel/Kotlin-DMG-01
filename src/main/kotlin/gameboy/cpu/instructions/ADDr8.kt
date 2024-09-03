@@ -5,7 +5,7 @@ import gameboy.cpu.registers.Registers
 
 data class ADDr8(
     override val registers: Registers,
-    val source: R8,
+    val target: R8,
 ) : Instruction<R8>() {
     private fun overflowingAdd(registers: Registers, value: UByte): UByte {
         return registers.a.plus(value).toUByte().also { newValue ->
@@ -26,7 +26,7 @@ data class ADDr8(
     }
 
     override fun execute() {
-        when (source) {
+        when (target) {
             R8.A -> add(registers, registers::a::get)
             R8.B -> add(registers, registers::b::get)
             R8.C -> add(registers, registers::c::get)

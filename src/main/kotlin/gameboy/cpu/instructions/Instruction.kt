@@ -12,8 +12,7 @@ sealed class Instruction<T : InstructionTarget> {
             opcode: UByte,
             registers: Registers,
         ): Instruction<*> {
-            return when (opcode.toInt()) {
-                0x04 -> ADDr8(registers, R8.B)
+            return when {
                 else -> throw IllegalStateException("Unknown opcode ($opcode)")
             }
         }
@@ -22,7 +21,8 @@ sealed class Instruction<T : InstructionTarget> {
             opcode: UByte,
             registers: Registers,
         ): Instruction<*> {
-            when (opcode) {
+            return when {
+                ((opcode.toInt() and 0x0F) == 0x04) -> ADDr8(registers, R8.fromOpcode(opcode))
                 else -> throw IllegalStateException("Unknown opcode ($opcode)")
             }
         }
