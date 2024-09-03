@@ -6,3 +6,4 @@ References:
  - https://rylev.github.io/DMG-01/public/book
  - https://gekkio.fi/files/gb-docs/gbctr.pdf
  - https://gbdev.io/pandocs/
+ - https://gbdev.io/gb-opcodes/optables/
