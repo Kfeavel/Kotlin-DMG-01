@@ -3,10 +3,10 @@ package gameboy.cpu.instructions
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 
-data class ADDr8(
+class ADDr8(
     override val registers: Registers,
     val target: R8,
-) : Instruction<R8>() {
+) : Instruction {
     private fun overflowingAdd(registers: Registers, value: UByte): UByte {
         return registers.a.plus(value).toUByte().also { newValue ->
             registers.f.apply {

@@ -8,7 +8,7 @@ class CPU {
     private val registers = Registers()
     private val bus = MemoryBus()
 
-    private fun execute(instruction: Instruction<*>) {
+    private fun execute(instruction: Instruction) {
         instruction.execute()
     }
 
