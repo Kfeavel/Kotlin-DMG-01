@@ -24,6 +24,20 @@ class TestInstruction {
         )
         assertTrue(nop is NOP)
 
+        val halt = Instruction.fromByte(
+            opcode = 0x76u,
+            prefixed = false,
+            registers = registers,
+        )
+        assertTrue(halt is HALT)
+
+        val illegal = Instruction.fromByte(
+            opcode = 0xD3u,
+            prefixed = false,
+            registers = registers,
+        )
+        assertTrue(illegal is HALT)
+
         val addr8a = Instruction.fromByte(
             opcode = (0x04u or (R8.A.register.toUInt() shl 4)).toUByte(),
             prefixed = false,
