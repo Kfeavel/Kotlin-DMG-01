@@ -8,6 +8,10 @@ interface Instruction {
     fun execute()
 
     companion object {
+        private fun UByte.matchesMask(mask: UByte): Boolean {
+            return ((this and mask) == mask)
+        }
+
         private fun fromBytePrefix(
             opcode: UByte,
             registers: Registers,
@@ -43,9 +47,8 @@ interface Instruction {
                 0xF4,
                 0xFC,
                 0xFD -> HALT(registers)
-                // Opcodes with register prefix (most common)
-                else -> when (opcode.toInt() and 0x0F) {
-                    0x04 -> ADDr8(registers, R8.fromOpcode(opcode))
+                else -> when {
+                    opcode.matchesMask(0x80u) -> ADDr8(registers, R8.fromOpcode(opcode, 0x07u))
                     else -> throw IllegalStateException("Unknown opcode ($opcode)")
                 }
             }
