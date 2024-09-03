@@ -20,8 +20,9 @@ enum class R8(
          * known register values.
          */
         @OptIn(ExperimentalStdlibApi::class)
-        fun fromOpcode(opcode: UByte, mask: UByte): R8 {
-            return R8.entries.find { it.register == ((opcode and mask).toUInt() shr 4).toUByte() }
+        fun fromOpcode(opcode: UByte, mask: UByte, shift: Int = 0): R8 {
+            val register = ((opcode and mask).toUInt() shr shift).toUByte()
+            return R8.entries.find { it.register == register }
                 ?: throw IllegalStateException("Invalid opcode register target (${opcode.toHexString()})")
         }
     }

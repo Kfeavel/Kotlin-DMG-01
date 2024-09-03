@@ -25,6 +25,7 @@ interface Instruction {
             }
         }
 
+        @OptIn(ExperimentalStdlibApi::class)
         private fun fromByteNoPrefix(
             opcode: UByte,
             registers: Registers,
@@ -48,8 +49,11 @@ interface Instruction {
                 0xFC,
                 0xFD -> HALT(registers)
                 else -> when {
-                    opcode.matchesMask(0x80u) -> ADDr8(registers, R8.fromOpcode(opcode, 0x07u))
-                    else -> throw IllegalStateException("Unknown opcode ($opcode)")
+                    opcode.matchesMask(0b00000100u) ->
+                        INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                    opcode.matchesMask(0b10000000u) ->
+                        ADDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                    else -> throw IllegalStateException("Unknown opcode (0x${opcode.toHexString()})")
                 }
             }
         }

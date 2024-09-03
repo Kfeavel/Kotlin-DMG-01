@@ -38,12 +38,20 @@ class TestInstruction {
         )
         assertTrue(illegal is HALT)
 
+        val incr8a = Instruction.fromByte(
+            opcode = 0x24u,
+            prefixed = false,
+            registers = registers,
+        )
+        assertTrue(incr8a is INCr8)
+        assertEquals(R8.H, incr8a.target)
+
         val addr8a = Instruction.fromByte(
             opcode = 0x80u,
             prefixed = false,
             registers = registers,
         )
         assertTrue(addr8a is ADDr8)
-        assertEquals(addr8a.target, R8.B)
+        assertEquals(R8.B, addr8a.target)
     }
 }
