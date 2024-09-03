@@ -1,6 +1,7 @@
 package gameboy.cpu
 
 import gameboy.cpu.instructions.Instruction
+import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
 
 class CPU {
@@ -8,7 +9,7 @@ class CPU {
     private val bus = MemoryBus()
 
     private fun execute(instruction: Instruction<*>) {
-        instruction.execute(this.registers)
+        instruction.execute()
     }
 
     private fun step() {
@@ -19,7 +20,7 @@ class CPU {
             opcode = bus.readByte((registers.pc.plus(1u)).toUShort())
         }
 
-        val instruction = Instruction.fromByte(opcode, prefixed)
+        val instruction = Instruction.fromByte(opcode, prefixed, registers)
         execute(instruction)
     }
 }

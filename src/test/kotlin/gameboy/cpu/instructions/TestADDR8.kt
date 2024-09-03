@@ -1,17 +1,18 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.Registers
+import gameboy.cpu.registers.R8
+import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestADD {
+class TestADDR8 {
     @Test
     fun `Test Add`() {
         val registers = Registers(
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            ADD(source = ArithmeticTarget.B).execute(this@apply)
+            ADDr8(registers = this, source = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
@@ -22,7 +23,7 @@ class TestADD {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADD(source = ArithmeticTarget.B).execute(this@apply)
+            ADDr8(registers = this, source = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -33,7 +34,7 @@ class TestADD {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADD(source = ArithmeticTarget.B).execute(this@apply)
+            ADDr8(registers = this, source = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -44,7 +45,7 @@ class TestADD {
             a = 0x0Fu,
             b = 0x0Fu
         ).apply {
-            ADD(source = ArithmeticTarget.B).execute(this@apply)
+            ADDr8(registers = this, source = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -55,7 +56,7 @@ class TestADD {
             a = 0xFFu,
             c = 0x01u
         ).apply {
-            ADD(source = ArithmeticTarget.C).execute(this@apply)
+            ADDr8(registers = this, source = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }

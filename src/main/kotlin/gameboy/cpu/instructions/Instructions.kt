@@ -1,35 +1,39 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.Registers
+import gameboy.cpu.registers.R8
+import gameboy.cpu.registers.Registers
 
 sealed class Instruction<T : InstructionTarget> {
-    abstract fun execute(registers: Registers)
+    abstract val registers: Registers
+    abstract fun execute()
 
     companion object {
-        private fun fromBytePrefix(opcode: UByte): Instruction<*> {
+        private fun fromBytePrefix(
+            opcode: UByte,
+            registers: Registers,
+        ): Instruction<*> {
+            return when (opcode.toInt()) {
+                0x04 -> ADDr8(registers, R8.B)
+                else -> throw IllegalStateException("Unknown opcode ($opcode)")
+            }
+        }
+
+        private fun fromByteNoPrefix(
+            opcode: UByte,
+            registers: Registers,
+        ): Instruction<*> {
             when (opcode) {
                 else -> throw IllegalStateException("Unknown opcode ($opcode)")
             }
         }
 
-        private fun fromByteNoPrefix(opcode: UByte): Instruction<*> {
-            when (opcode) {
-                else -> throw IllegalStateException("Unknown opcode ($opcode)")
-            }
-        }
-
-        fun fromByte(opcode: UByte, prefixed: Boolean): Instruction<*> = when (prefixed) {
-            true -> fromBytePrefix(opcode)
-            false -> fromByteNoPrefix(opcode)
-        }
-
-        fun execute(instruction: Instruction<*>) {
-            when (instruction) {
-                is ADD -> {
-
-                }
-                else -> throw IllegalStateException("Unknown instruction ($instruction)")
-            }
+        fun fromByte(
+            opcode: UByte,
+            prefixed: Boolean,
+            registers: Registers
+        ): Instruction<*> = when (prefixed) {
+            true -> fromBytePrefix(opcode, registers)
+            false -> fromByteNoPrefix(opcode, registers)
         }
     }
 }

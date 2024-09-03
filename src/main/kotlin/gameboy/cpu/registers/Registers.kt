@@ -1,7 +1,12 @@
-package gameboy.cpu
+package gameboy.cpu.registers
+
+import gameboy.cpu.Flags
 
 data class Registers(
+    // General registers
+    //  - Accumulator
     var a: UByte = 0u,
+    //  - General purpose
     var b: UByte = 0u,
     var c: UByte = 0u,
     var d: UByte = 0u,
@@ -9,7 +14,11 @@ data class Registers(
     var f: Flags = Flags(),
     var h: UByte = 0u,
     var l: UByte = 0u,
+    // Special registers
+    //  - Program Counter
     var pc: UShort = 0u,
+    //  - Stack Pointer
+    var sp: UShort = 0u,
 ) {
     private fun readUShort(high: UByte, low: UByte): UShort {
         return ((high.toInt() shl 8).toUShort() or low.toUShort())

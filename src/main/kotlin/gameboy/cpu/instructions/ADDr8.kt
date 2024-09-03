@@ -1,8 +1,12 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.Registers
+import gameboy.cpu.registers.R8
+import gameboy.cpu.registers.Registers
 
-data class ADD(val source: ArithmeticTarget) : Instruction<ArithmeticTarget>() {
+data class ADDr8(
+    override val registers: Registers,
+    val source: R8,
+) : Instruction<R8>() {
     private fun overflowingAdd(registers: Registers, value: UByte): UByte {
         return registers.a.plus(value).toUByte().also { newValue ->
             registers.f.apply {
@@ -21,15 +25,16 @@ data class ADD(val source: ArithmeticTarget) : Instruction<ArithmeticTarget>() {
         registers.a = overflowingAdd(registers, get())
     }
 
-    override fun execute(registers: Registers) {
+    override fun execute() {
         when (source) {
-            ArithmeticTarget.A -> add(registers, registers::a::get)
-            ArithmeticTarget.B -> add(registers, registers::b::get)
-            ArithmeticTarget.C -> add(registers, registers::c::get)
-            ArithmeticTarget.D -> add(registers, registers::d::get)
-            ArithmeticTarget.E -> add(registers, registers::e::get)
-            ArithmeticTarget.H -> add(registers, registers::h::get)
-            ArithmeticTarget.L -> add(registers, registers::l::get)
+            R8.A -> add(registers, registers::a::get)
+            R8.B -> add(registers, registers::b::get)
+            R8.C -> add(registers, registers::c::get)
+            R8.D -> add(registers, registers::d::get)
+            R8.E -> add(registers, registers::e::get)
+            R8.H -> add(registers, registers::h::get)
+            R8.L -> add(registers, registers::l::get)
+            else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 
         registers.pc.inc()
