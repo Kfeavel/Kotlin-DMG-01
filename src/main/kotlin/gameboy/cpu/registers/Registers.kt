@@ -1,7 +1,5 @@
 package gameboy.cpu.registers
 
-import gameboy.cpu.Flags
-
 data class Registers(
     // General registers
     //  - Accumulator

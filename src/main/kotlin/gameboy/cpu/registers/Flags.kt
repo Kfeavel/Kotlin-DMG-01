@@ -1,4 +1,4 @@
-package gameboy.cpu
+package gameboy.cpu.registers
 
 data class Flags(
     var zero: Boolean = false,

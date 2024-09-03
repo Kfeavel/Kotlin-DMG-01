@@ -1,4 +1,4 @@
-package gameboy.cpu
+package gameboy.cpu.registers
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

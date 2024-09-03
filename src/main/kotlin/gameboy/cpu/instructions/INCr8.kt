@@ -37,4 +37,8 @@ class INCr8(
 
         registers.pc.inc()
     }
+
+    override fun toString(): String {
+        return "${this::class.simpleName} $target"
+    }
 }
