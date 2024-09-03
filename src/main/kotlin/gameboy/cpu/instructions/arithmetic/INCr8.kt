@@ -1,6 +1,6 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.isAdditionHalfCarry
+import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 
@@ -19,7 +19,7 @@ class INCr8(
         registers.f.apply {
             zero = (sum.toUInt() == 0u)
             subtract = false
-            halfCarry = isAdditionHalfCarry(sum, value)
+            halfCarry = isAdditionHalfCarry(value, 1u)
         }
     }
 

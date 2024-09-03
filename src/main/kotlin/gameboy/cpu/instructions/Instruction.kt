@@ -1,5 +1,8 @@
 package gameboy.cpu.instructions
 
+import gameboy.cpu.instructions.arithmetic.ADDr8
+import gameboy.cpu.instructions.arithmetic.DECr8
+import gameboy.cpu.instructions.arithmetic.INCr8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
@@ -9,8 +12,8 @@ interface Instruction {
     fun execute()
 
     companion object {
-        private fun UByte.matchesMask(mask: UByte): Boolean {
-            return ((this and mask) == mask)
+        private fun UByte.matchesMask(mask: UByte, result: UByte = mask): Boolean {
+            return ((this and mask) == result)
         }
 
         private fun fromByteWithPrefix(
@@ -51,10 +54,12 @@ interface Instruction {
                 0xFD -> HALT(registers)
                 // Complex instructions
                 else -> when {
-                    opcode.matchesMask(0b00000100u) ->
-                        INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
-                    opcode.matchesMask(0b10000000u) ->
-                        ADDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                    opcode.matchesMask(0b00000111u, 0b00000100u) ->
+                        return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                    opcode.matchesMask(0b00000111u, 0b00000101u) ->
+                        return DECr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                    opcode.matchesMask(0b10000000u, 0b10000000u) ->
+                        return ADDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     else -> throw IllegalStateException("Unknown opcode (0x${opcode.toHexString()})")
                 }
             }

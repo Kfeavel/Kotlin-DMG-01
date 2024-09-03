@@ -21,9 +21,11 @@ class TestCPU {
             0x3Cu, // INC A
             0x00u, // NOP
             0x3Cu, // INC A
-            0x3Cu, // INC A
+            0x3Cu, // INC A, A = 3
             0x04u, // INC B
             0x04u, // INC B
+            0x05u, // DEC B
+            0x04u, // INC B, A = 2
             0x80u, // ADD A, B
             0x76u, // HALT
         )
@@ -36,8 +38,8 @@ class TestCPU {
             }
         }
 
-        assertEquals(0x02u, cpu.registers.b)
         assertEquals(0x05u, cpu.registers.a)
-        assertEquals(0x07u, cpu.registers.pc)
+        assertEquals(0x02u, cpu.registers.b)
+        assertEquals((instructions.size - 1).toUShort(), cpu.registers.pc)
     }
 }

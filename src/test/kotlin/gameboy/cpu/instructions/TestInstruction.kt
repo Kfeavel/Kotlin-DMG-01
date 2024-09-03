@@ -1,5 +1,7 @@
 package gameboy.cpu.instructions
 
+import gameboy.cpu.instructions.arithmetic.ADDr8
+import gameboy.cpu.instructions.arithmetic.INCr8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus

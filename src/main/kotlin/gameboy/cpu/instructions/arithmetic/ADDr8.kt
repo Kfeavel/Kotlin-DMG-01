@@ -1,6 +1,6 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.isAdditionHalfCarry
+import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 
@@ -9,16 +9,14 @@ class ADDr8(
     internal val target: R8,
 ) : Instruction {
     private fun overflowingAdd(registers: Registers, get: () -> UByte): UByte {
-        val value = get()
-        return registers.a.plus(value).toUByte().also { newValue ->
+        val term = get()
+        val value = registers.a
+        return registers.a.plus(term).toUByte().also { newValue ->
             registers.f.apply {
                 zero = (newValue.toUInt() == 0u)
                 subtract = false
-                // Half Carry is set if adding the lower nibbles of the value and register A
-                // together result in a value bigger than 0xF. If the result is larger than 0xF
-                // than the addition caused a carry from the lower nibble to the upper nibble.
-                halfCarry = isAdditionHalfCarry(newValue, value)
-                carry = (newValue < value)
+                halfCarry = isAdditionHalfCarry(value, term)
+                carry = (newValue < term)
             }
         }
     }
