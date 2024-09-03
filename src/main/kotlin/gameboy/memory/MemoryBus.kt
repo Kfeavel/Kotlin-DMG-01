@@ -1,7 +1,13 @@
 package gameboy.memory
 
 data class MemoryBus(
-    val memory: List<UByte> = List(size = 0xFFFF, init = { 0u })
+    val memory: MutableList<UByte> = MutableList(size = 0xFFFF, init = { 0u })
 ) {
-    fun readByte(address: UShort) = memory[address.toInt()]
+    operator fun get(index: UShort): UByte {
+        return memory[index.toInt()]
+    }
+
+    operator fun set(index: UShort, data: UByte) {
+        memory[index.toInt()] = data
+    }
 }

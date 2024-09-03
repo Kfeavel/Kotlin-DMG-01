@@ -14,7 +14,7 @@ class TestInstruction {
     private lateinit var bus: MemoryBus
 
     @BeforeTest
-    fun `Reset Registers`() {
+    fun `Reset State`() {
         registers = Registers()
         bus = MemoryBus()
     }

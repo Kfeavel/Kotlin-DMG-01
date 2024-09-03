@@ -5,11 +5,14 @@ import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
 
 class CPU {
-    private val registers = Registers()
-    private val bus = MemoryBus()
+    internal val registers = Registers()
+    internal val bus = MemoryBus()
 
     internal fun step() {
-        val opcode = bus.readByte(registers.pc)
-        Instruction.fromByte(opcode, registers, bus).execute()
+        val opcode = bus[registers.pc]
+        Instruction.fromByte(opcode, registers, bus).apply {
+            println("${this@apply}")
+            execute()
+        }
     }
 }

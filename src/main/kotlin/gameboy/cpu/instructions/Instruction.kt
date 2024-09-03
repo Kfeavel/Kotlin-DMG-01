@@ -32,7 +32,7 @@ interface Instruction {
                 0x00 -> NOP(registers)
                 0x76 -> HALT(registers)
                 0xCB -> fromByteWithPrefix(
-                    bus.readByte((registers.pc.inc())),
+                    bus[++registers.pc],
                     registers,
                 )
                 // Unimplemented opcodes that simply hang the CPU when called

@@ -9,4 +9,6 @@ class HALT(
     override fun execute() {
         throw HaltException()
     }
+
+    override fun toString() = "${this::class.simpleName}"
 }

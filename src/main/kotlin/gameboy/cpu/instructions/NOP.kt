@@ -6,6 +6,8 @@ class NOP(
     override val registers: Registers
 ) : Instruction {
     override fun execute() {
-        registers.pc.inc()
+        registers.pc++
     }
+
+    override fun toString() = "${this::class.simpleName}"
 }

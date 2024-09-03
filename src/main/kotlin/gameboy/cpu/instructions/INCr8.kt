@@ -35,10 +35,8 @@ class INCr8(
             else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 
-        registers.pc.inc()
+        registers.pc++
     }
 
-    override fun toString(): String {
-        return "${this::class.simpleName} $target"
-    }
+    override fun toString() = "${this::class.simpleName} $target"
 }
