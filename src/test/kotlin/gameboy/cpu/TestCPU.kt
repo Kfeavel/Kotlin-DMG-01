@@ -1,6 +1,7 @@
 package gameboy.cpu
 
 import gameboy.cpu.exceptions.HaltException
+import gameboy.cpu.registers.Registers
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -16,17 +17,35 @@ class TestCPU {
 
     @Test
     // FIXME: Break this up into multiple different tests
-    fun `Test Step`() {
+    fun `Test Step - Arithmetic`() {
+        // Series of no-ops to test arithmetic
         val instructions = listOf<UByte>(
-            0x3Cu, // INC A
-            0x00u, // NOP
-            0x3Cu, // INC A
-            0x3Cu, // INC A, A = 3
-            0x04u, // INC B
+            // Increment and Decrement No-op
             0x04u, // INC B
             0x05u, // DEC B
-            0x04u, // INC B, A = 2
-            0x80u, // ADD A, B
+            // Addition & Subtraction No-op
+            0x0Cu, // INC C
+            0x81u, // ADD A, C
+            0x91u, // SUB A, C
+        )
+
+        cpu.bus.memory.addAll(0, instructions)
+
+        repeat(instructions.size) {
+            cpu.step()
+        }
+
+        assertEquals(0x00u, cpu.registers.a)
+        assertEquals(0x00u, cpu.registers.b)
+        assertEquals(0x01u, cpu.registers.c)
+        assertEquals(instructions.size.toUShort(), cpu.registers.pc)
+    }
+
+    @Test
+    fun `Test Step - NOP & HALT`() {
+        // Series of no-ops to test arithmetic
+        val instructions = listOf<UByte>(
+            0x00u, // NOP
             0x76u, // HALT
         )
 
@@ -38,8 +57,8 @@ class TestCPU {
             }
         }
 
-        assertEquals(0x05u, cpu.registers.a)
-        assertEquals(0x02u, cpu.registers.b)
-        assertEquals((instructions.size - 1).toUShort(), cpu.registers.pc)
+        // Only PC should have changed between NOP and HALT
+        // NOP will increment PC but HALT will not, so we should have one less
+        assertEquals(Registers(pc = (instructions.size - 1).toUShort()), cpu.registers)
     }
 }

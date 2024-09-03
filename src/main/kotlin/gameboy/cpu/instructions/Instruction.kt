@@ -3,6 +3,7 @@ package gameboy.cpu.instructions
 import gameboy.cpu.instructions.arithmetic.ADDr8
 import gameboy.cpu.instructions.arithmetic.DECr8
 import gameboy.cpu.instructions.arithmetic.INCr8
+import gameboy.cpu.instructions.arithmetic.SUBr8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
@@ -58,8 +59,10 @@ interface Instruction {
                         return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
                         return DECr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
-                    opcode.matchesMask(0b10000000u, 0b10000000u) ->
+                    opcode.matchesMask(0b11111000u, 0b10000000u) ->
                         return ADDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                    opcode.matchesMask(0b11111000u, 0b10010000u) ->
+                        return SUBr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     else -> throw IllegalStateException("Unknown opcode (0x${opcode.toHexString()})")
                 }
             }

@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestDECR8 {
+class TestDECr8 {
     @Test
     fun `Test Decrement`() {
         val registers = Registers(
