@@ -66,6 +66,12 @@ interface Instruction {
                         return SUBr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10011000u) ->
                         return SBCr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                    // TODO:
+                    //  - AND
+                    //  - XOR
+                    //  - OR
+                    opcode.matchesMask(0b11111000u, 0b10111000u) ->
+                        return CPr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     else -> throw IllegalStateException("Unknown opcode (0x${opcode.toHexString()})")
                 }
             }
