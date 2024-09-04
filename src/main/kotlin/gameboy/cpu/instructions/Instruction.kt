@@ -29,13 +29,10 @@ interface Instruction {
             registers: Registers,
             bus: MemoryBus,
         ): Instruction {
-            return when (opcode.toInt()) {
-                0x00 -> NOP(registers)
-                0x76 -> HALT(registers)
-                0xCB -> fromByteWithPrefix(
-                    bus[++registers.pc],
-                    registers,
-                )
+            when (opcode.toInt()) {
+                0x00 -> return NOP(registers)
+                0x76 -> return HALT(registers)
+                0xCB -> return fromByteWithPrefix(bus[++registers.pc], registers)
                 // Unimplemented opcodes that simply hang the CPU when called
                 // For our use cases this will simply halt emulation. They could be used in some emulator specific
                 // manner which is why these are called out instead of simply letting them fall to the `else` block.
@@ -49,7 +46,7 @@ interface Instruction {
                 0xED,
                 0xF4,
                 0xFC,
-                0xFD -> HALT(registers)
+                0xFD -> return HALT(registers)
                 // Complex instructions
                 else -> when {
                     // Block 0
@@ -66,8 +63,9 @@ interface Instruction {
                         return SUBr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10011000u) ->
                         return SBCr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                    opcode.matchesMask(0b11111000u, 0b10100000u) ->
+                        return ANDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     // TODO:
-                    //  - AND
                     //  - XOR
                     //  - OR
                     opcode.matchesMask(0b11111000u, 0b10111000u) ->
