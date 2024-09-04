@@ -65,8 +65,8 @@ interface Instruction {
                         return SBCr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10100000u) ->
                         return ANDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
-                    // TODO:
-                    //  - XOR
+                    opcode.matchesMask(0b11111000u, 0b10101000u) ->
+                        return XORr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10110000u) ->
                         return ORr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10111000u) ->

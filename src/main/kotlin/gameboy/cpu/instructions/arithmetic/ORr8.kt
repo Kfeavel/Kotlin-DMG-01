@@ -8,9 +8,6 @@ class ORr8(
     override val registers: Registers,
     internal val target: R8,
 ) : Instruction {
-    /**
-     * Overflowing add
-     */
     private fun or(registers: Registers, get: () -> UByte) {
         val newValue = registers.a or get()
 
