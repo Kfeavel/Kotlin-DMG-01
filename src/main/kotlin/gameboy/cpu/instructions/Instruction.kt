@@ -5,6 +5,13 @@ import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
 
+/**
+ * [Instruction Set Reference #1](https://gbdev.io/pandocs/CPU_Instruction_Set.html)
+ *
+ * [Instruction Set Reference #2](https://gekkio.fi/files/gb-docs/gbctr.pdf)
+ *
+ * [Instruction Set Reference #3](https://gbdev.io/gb-opcodes//optables/dark)
+ */
 interface Instruction {
     val registers: Registers
     fun execute()
