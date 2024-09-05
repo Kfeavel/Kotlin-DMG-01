@@ -65,8 +65,12 @@ interface Instruction {
                     // Block 0
                     opcode.matchesMask(LDr16imm16.mask, LDr16imm16.opcode) ->
                         return LDr16imm16(registers, bus, R16.fromOpcode(opcode, LDr16imm16.register, 4))
+
+                    opcode.matchesMask(INCr16.mask, INCr16.opcode) ->
+                        return INCr16(registers, R16.fromOpcode(opcode, INCr16.register, 4))
                     opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, ADDhlr16.register, 4))
+
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
                         return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
