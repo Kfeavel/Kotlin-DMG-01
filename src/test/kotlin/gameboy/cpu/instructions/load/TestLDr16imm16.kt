@@ -1,12 +1,25 @@
 package gameboy.cpu.instructions.load
 
+import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class TestLDr16imm16 {
+    @Test
+    fun `Decode Instruction`() {
+        val ldr16imm16 = Instruction.fromByte(
+            opcode = 0b00011001u,
+            registers = Registers(),
+            bus = MemoryBus(),
+        )
+        assertTrue(ldr16imm16 is LDr16imm16)
+        assertEquals(R16.DE, ldr16imm16.target)
+    }
+
     @Test
     fun `Test u16 Immediate Load`() {
         val registers = Registers()
