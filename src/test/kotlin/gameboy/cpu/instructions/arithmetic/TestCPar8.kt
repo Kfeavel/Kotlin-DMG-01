@@ -1,21 +1,20 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.ADDar8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestADDar8 {
+class TestCPar8 {
     @Test
-    fun `Test Add`() {
+    fun `Test Compare`() {
         val registers = Registers(
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            ADDar8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0xABu, registers.a)
+        assertEquals(0xA0u, registers.a)
     }
 
     @Test
@@ -24,8 +23,9 @@ class TestADDar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADDar8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
+        assertEquals(0x00u, registers.a)
         assertEquals(true, registers.f.zero)
     }
 
@@ -35,30 +35,33 @@ class TestADDar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADDar8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(false, registers.f.subtract)
+        assertEquals(0x00u, registers.a)
+        assertEquals(true, registers.f.subtract)
     }
 
     @Test
     fun `Test Half Carry`() {
         val registers = Registers(
-            a = 0x0Fu,
-            b = 0x0Fu
+            a = 0x10u,
+            b = 0x01u
         ).apply {
-            ADDar8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
+        assertEquals(0x10u, registers.a)
         assertEquals(true, registers.f.halfCarry)
     }
 
     @Test
     fun `Test Overflow`() {
         val registers = Registers(
-            a = 0xFFu,
+            a = 0x00u,
             c = 0x01u
         ).apply {
-            ADDar8(registers = this, target = R8.C).execute()
+            CPar8(registers = this, target = R8.C).execute()
         }
+        assertEquals(0x00u, registers.a)
         assertEquals(true, registers.f.carry)
     }
 }

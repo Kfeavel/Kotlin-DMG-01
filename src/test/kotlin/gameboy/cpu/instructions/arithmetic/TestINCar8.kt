@@ -1,28 +1,27 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.DECar8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestDECar8 {
+class TestINCar8 {
     @Test
-    fun `Test Decrement`() {
+    fun `Test Increment`() {
         val registers = Registers(
-            b = 0xFFu
+            b = 0x0Bu
         ).apply {
-            DECar8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0xFEu, registers.b)
+        assertEquals(0x0Cu, registers.b)
     }
 
     @Test
     fun `Test Zero`() {
         val registers = Registers(
-            b = 0x01u
+            b = 0xFFu
         ).apply {
-            DECar8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -30,21 +29,20 @@ class TestDECar8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers(
-            b = 0x01u
+            b = 0x00u
         ).apply {
-            DECar8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(true, registers.f.subtract)
+        assertEquals(false, registers.f.subtract)
     }
 
     @Test
     fun `Test Half Carry`() {
         val registers = Registers(
-            b = 0xF0u
+            b = 0x0Fu
         ).apply {
-            DECar8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0x0EFu, registers.b)
         assertEquals(true, registers.f.halfCarry)
     }
 }

@@ -1,41 +1,29 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.XORar8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestXXORar8 {
+class TestORar8 {
     @Test
-    fun `Test XOR`() {
+    fun `Test OR`() {
         val registers = Registers(
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, target = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
 
     @Test
-    fun `Test XOR (2)`() {
-        val registers = Registers(
-            a = 0xFFu,
-            b = 0xABu
-        ).apply {
-            XORar8(registers = this, target = R8.B).execute()
-        }
-        assertEquals(0x54u, registers.a)
-    }
-
-    @Test
     fun `Test Zero`() {
         val registers = Registers(
-            a = 0x0Bu,
-            b = 0x0Bu
+            a = 0x00u,
+            b = 0x00u
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -46,7 +34,7 @@ class TestXXORar8 {
             a = 0xF0u,
             b = 0x0Fu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.zero)
     }
@@ -54,7 +42,7 @@ class TestXXORar8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -62,7 +50,7 @@ class TestXXORar8 {
     @Test
     fun `Test Half Carry`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.halfCarry)
     }
@@ -70,7 +58,7 @@ class TestXXORar8 {
     @Test
     fun `Test Carry`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.C).execute()
+            ORar8(registers = this, target = R8.C).execute()
         }
         assertEquals(false, registers.f.carry)
     }

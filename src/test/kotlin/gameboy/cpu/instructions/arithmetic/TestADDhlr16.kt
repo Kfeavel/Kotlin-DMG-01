@@ -1,6 +1,6 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.ADDhlr16
+import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus

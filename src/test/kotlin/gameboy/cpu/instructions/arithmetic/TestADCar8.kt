@@ -1,15 +1,14 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.arithmetic
 
-import gameboy.cpu.instructions.arithmetic.SBCar8
 import gameboy.cpu.registers.Flags
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestSBCar8 {
+class TestADCar8 {
     @Test
-    fun `Test Sub`() {
+    fun `Test Add`() {
         val registers = Registers(
             a = 0xA0u,
             b = 0x0Bu,
@@ -17,9 +16,9 @@ class TestSBCar8 {
                 carry = true
             )
         ).apply {
-            SBCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0x94u, registers.a)
+        assertEquals(0xACu, registers.a)
     }
 
     @Test
@@ -28,7 +27,7 @@ class TestSBCar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SBCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -36,15 +35,15 @@ class TestSBCar8 {
     @Test
     fun `Test Zero With Carry`() {
         val registers = Registers(
-            a = 0x02u,
-            b = 0x01u,
+            a = 0x00u,
+            b = 0x00u,
             f = Flags(
                 carry = true
             )
         ).apply {
-            SBCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(true, registers.f.zero)
+        assertEquals(false, registers.f.zero)
     }
 
     @Test
@@ -53,21 +52,21 @@ class TestSBCar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SBCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(true, registers.f.subtract)
+        assertEquals(false, registers.f.subtract)
     }
 
     @Test
     fun `Test Half Carry`() {
         val registers = Registers(
-            a = 0x10u,
-            b = 0x00u,
+            a = 0x0Fu,
+            b = 0x0Eu,
             f = Flags(
                 carry = true
             )
         ).apply {
-            SBCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -75,13 +74,13 @@ class TestSBCar8 {
     @Test
     fun `Test Overflow`() {
         val registers = Registers(
-            a = 0x00u,
+            a = 0xFFu,
             c = 0x00u,
             f = Flags(
                 carry = true
             )
         ).apply {
-            SBCar8(registers = this, target = R8.C).execute()
+            ADCar8(registers = this, target = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }
