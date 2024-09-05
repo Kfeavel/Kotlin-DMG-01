@@ -5,13 +5,13 @@ import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestINCar8 {
+class TestINCr8 {
     @Test
     fun `Test Increment`() {
         val registers = Registers(
             b = 0x0Bu
         ).apply {
-            INCar8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, target = R8.B).execute()
         }
         assertEquals(0x0Cu, registers.b)
     }
@@ -21,7 +21,7 @@ class TestINCar8 {
         val registers = Registers(
             b = 0xFFu
         ).apply {
-            INCar8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -31,7 +31,7 @@ class TestINCar8 {
         val registers = Registers(
             b = 0x00u
         ).apply {
-            INCar8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -41,7 +41,7 @@ class TestINCar8 {
         val registers = Registers(
             b = 0x0Fu
         ).apply {
-            INCar8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }

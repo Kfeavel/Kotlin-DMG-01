@@ -1,7 +1,7 @@
 package gameboy.cpu.instructions
 
 import gameboy.cpu.instructions.arithmetic.ADDar8
-import gameboy.cpu.instructions.arithmetic.INCar8
+import gameboy.cpu.instructions.arithmetic.INCr8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
@@ -62,7 +62,7 @@ class TestInstruction {
             registers = registers,
             bus = bus,
         )
-        assertTrue(incr8a is INCar8)
+        assertTrue(incr8a is INCr8)
         assertEquals(R8.H, incr8a.target)
 
         val addr8a = Instruction.fromByte(

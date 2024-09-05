@@ -68,9 +68,9 @@ interface Instruction {
                     opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, ADDhlr16.register, 4))
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
-                        return INCar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                        return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
-                        return DECar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                        return DECr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(LDr8imm8.mask, LDr8imm8.opcode) ->
                         return LDr8imm8(registers, bus, R8.fromOpcode(opcode, LDr8imm8.register, 3))
                     // Block 2 (8-bit arithmetic)
