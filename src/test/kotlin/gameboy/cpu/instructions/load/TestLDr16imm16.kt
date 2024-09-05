@@ -1,4 +1,4 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.load
 
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.Registers

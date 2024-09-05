@@ -1,5 +1,7 @@
-package gameboy.cpu.instructions
+package gameboy.cpu.instructions.load
 
+import gameboy.cpu.instructions.Instruction
+import gameboy.cpu.instructions.InstructionBitmasks
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus

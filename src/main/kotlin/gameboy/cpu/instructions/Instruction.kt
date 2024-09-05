@@ -1,6 +1,7 @@
 package gameboy.cpu.instructions
 
 import gameboy.cpu.instructions.arithmetic.*
+import gameboy.cpu.instructions.load.LDr16imm16
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
