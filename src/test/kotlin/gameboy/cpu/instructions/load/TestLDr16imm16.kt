@@ -12,7 +12,7 @@ class TestLDr16imm16 {
     @Test
     fun `Decode Instruction`() {
         val ldr16imm16 = Instruction.fromByte(
-            opcode = 0b00011001u,
+            opcode = 0b00010001u,
             registers = Registers(),
             bus = MemoryBus(),
         )

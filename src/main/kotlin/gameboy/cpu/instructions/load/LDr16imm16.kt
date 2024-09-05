@@ -13,7 +13,7 @@ class LDr16imm16(
 ) : Instruction {
     companion object : InstructionBitmasks {
         override val mask: UByte = 0b11001111u
-        override val opcode: UByte = 0b00001001u
+        override val opcode: UByte = 0b00000001u
     }
 
     /**

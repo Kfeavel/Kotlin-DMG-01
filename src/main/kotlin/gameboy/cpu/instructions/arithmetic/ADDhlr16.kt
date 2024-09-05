@@ -1,6 +1,7 @@
 package gameboy.cpu.instructions.arithmetic
 
 import gameboy.cpu.instructions.Instruction
+import gameboy.cpu.instructions.InstructionBitmasks
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.Registers
 
@@ -8,6 +9,12 @@ class ADDhlr16(
     override val registers: Registers,
     internal val target: R16,
 ) : Instruction {
+    companion object : InstructionBitmasks {
+        override val mask: UByte = 0b11001111u
+        override val opcode: UByte = 0b00001001u
+
+    }
+
     /**
      * Overflowing add
      */

@@ -2,6 +2,7 @@ package gameboy.cpu.instructions
 
 import gameboy.cpu.instructions.arithmetic.*
 import gameboy.cpu.instructions.load.LDr16imm16
+import gameboy.cpu.instructions.load.LDr8imm8
 import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
@@ -64,12 +65,14 @@ interface Instruction {
                     // Block 0
                     opcode.matchesMask(LDr16imm16.mask, LDr16imm16.opcode) ->
                         return LDr16imm16(registers, bus, R16.fromOpcode(opcode, LDr16imm16.register, 4))
-                    opcode.matchesMask(0b00001111u, 0b00001001u) ->
-                        return ADDhlr16(registers, R16.fromOpcode(opcode, 0b00110000u, 4))
+                    opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->
+                        return ADDhlr16(registers, R16.fromOpcode(opcode, ADDhlr16.register, 4))
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
                         return INCar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
                         return DECar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                    opcode.matchesMask(LDr8imm8.mask, LDr8imm8.opcode) ->
+                        return LDr8imm8(registers, bus, R8.fromOpcode(opcode, LDr8imm8.register, 3))
                     // Block 2 (8-bit arithmetic)
                     opcode.matchesMask(0b11111000u, 0b10000000u) ->
                         return ADDar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
