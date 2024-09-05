@@ -1,6 +1,7 @@
 package gameboy.cpu.instructions
 
 import gameboy.cpu.instructions.arithmetic.*
+import gameboy.cpu.registers.R16
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
@@ -37,9 +38,12 @@ interface Instruction {
             bus: MemoryBus,
         ): Instruction {
             when (opcode.toInt()) {
+                // Block 0
                 0x00 -> return NOP(registers)
+                // Block 1 (8-bit register-to-register loads)
                 0x76 -> return HALT(registers)
                 0xCB -> return fromByteWithPrefix(bus[++registers.pc], registers)
+                // Block 3
                 // Unimplemented opcodes that simply hang the CPU when called
                 // For our use cases this will simply halt emulation. They could be used in some emulator specific
                 // manner which is why these are called out instead of simply letting them fall to the `else` block.
@@ -57,6 +61,8 @@ interface Instruction {
                 // Complex instructions
                 else -> when {
                     // Block 0
+                    opcode.matchesMask(0b00001111u, 0b00001001u) ->
+                        return ADDhlr16(registers, R16.fromOpcode(opcode, 0b00110000u, 4))
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
                         return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
