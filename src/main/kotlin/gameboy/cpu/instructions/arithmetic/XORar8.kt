@@ -4,7 +4,7 @@ import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 
-class XORr8(
+class XORar8(
     override val registers: Registers,
     internal val target: R8,
 ) : Instruction {

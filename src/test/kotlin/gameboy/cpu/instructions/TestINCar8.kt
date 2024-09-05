@@ -1,30 +1,28 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.instructions.arithmetic.ADDr8
+import gameboy.cpu.instructions.arithmetic.INCar8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestADDr8 {
+class TestINCar8 {
     @Test
-    fun `Test Add`() {
+    fun `Test Increment`() {
         val registers = Registers(
-            a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            ADDr8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0xABu, registers.a)
+        assertEquals(0x0Cu, registers.b)
     }
 
     @Test
     fun `Test Zero`() {
         val registers = Registers(
-            a = 0x00u,
-            b = 0x00u
+            b = 0xFFu
         ).apply {
-            ADDr8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -32,10 +30,9 @@ class TestADDr8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers(
-            a = 0x00u,
             b = 0x00u
         ).apply {
-            ADDr8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -43,22 +40,10 @@ class TestADDr8 {
     @Test
     fun `Test Half Carry`() {
         val registers = Registers(
-            a = 0x0Fu,
             b = 0x0Fu
         ).apply {
-            ADDr8(registers = this, target = R8.B).execute()
+            INCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
-    }
-
-    @Test
-    fun `Test Overflow`() {
-        val registers = Registers(
-            a = 0xFFu,
-            c = 0x01u
-        ).apply {
-            ADDr8(registers = this, target = R8.C).execute()
-        }
-        assertEquals(true, registers.f.carry)
     }
 }

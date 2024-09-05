@@ -1,13 +1,13 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.instructions.arithmetic.SBCr8
+import gameboy.cpu.instructions.arithmetic.SBCar8
 import gameboy.cpu.registers.Flags
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestSBCr8 {
+class TestSBCar8 {
     @Test
     fun `Test Sub`() {
         val registers = Registers(
@@ -17,7 +17,7 @@ class TestSBCr8 {
                 carry = true
             )
         ).apply {
-            SBCr8(registers = this, target = R8.B).execute()
+            SBCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(0x94u, registers.a)
     }
@@ -28,7 +28,7 @@ class TestSBCr8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SBCr8(registers = this, target = R8.B).execute()
+            SBCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -42,7 +42,7 @@ class TestSBCr8 {
                 carry = true
             )
         ).apply {
-            SBCr8(registers = this, target = R8.B).execute()
+            SBCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -53,7 +53,7 @@ class TestSBCr8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SBCr8(registers = this, target = R8.B).execute()
+            SBCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.subtract)
     }
@@ -67,7 +67,7 @@ class TestSBCr8 {
                 carry = true
             )
         ).apply {
-            SBCr8(registers = this, target = R8.B).execute()
+            SBCar8(registers = this, target = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -81,7 +81,7 @@ class TestSBCr8 {
                 carry = true
             )
         ).apply {
-            SBCr8(registers = this, target = R8.C).execute()
+            SBCar8(registers = this, target = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }

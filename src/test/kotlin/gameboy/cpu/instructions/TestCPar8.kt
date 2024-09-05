@@ -1,21 +1,21 @@
 package gameboy.cpu.instructions
 
-import gameboy.cpu.instructions.arithmetic.SUBr8
+import gameboy.cpu.instructions.arithmetic.CPar8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestSUBr8 {
+class TestCPar8 {
     @Test
-    fun `Test Sub`() {
+    fun `Test Compare`() {
         val registers = Registers(
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            SUBr8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
-        assertEquals(0x95u, registers.a)
+        assertEquals(0xA0u, registers.a)
     }
 
     @Test
@@ -24,8 +24,9 @@ class TestSUBr8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SUBr8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
+        assertEquals(0x00u, registers.a)
         assertEquals(true, registers.f.zero)
     }
 
@@ -35,8 +36,9 @@ class TestSUBr8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SUBr8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
+        assertEquals(0x00u, registers.a)
         assertEquals(true, registers.f.subtract)
     }
 
@@ -46,8 +48,9 @@ class TestSUBr8 {
             a = 0x10u,
             b = 0x01u
         ).apply {
-            SUBr8(registers = this, target = R8.B).execute()
+            CPar8(registers = this, target = R8.B).execute()
         }
+        assertEquals(0x10u, registers.a)
         assertEquals(true, registers.f.halfCarry)
     }
 
@@ -57,8 +60,9 @@ class TestSUBr8 {
             a = 0x00u,
             c = 0x01u
         ).apply {
-            SUBr8(registers = this, target = R8.C).execute()
+            CPar8(registers = this, target = R8.C).execute()
         }
+        assertEquals(0x00u, registers.a)
         assertEquals(true, registers.f.carry)
     }
 }

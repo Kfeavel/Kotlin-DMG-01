@@ -4,36 +4,36 @@ import gameboy.cpu.instructions.Instruction
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 
-class ADDr8(
+class SUBar8(
     override val registers: Registers,
     internal val target: R8,
 ) : Instruction {
     /**
-     * Overflowing add
+     * Underflowing subtraction
      */
-    private fun add(registers: Registers, get: () -> UByte) {
+    private fun sub(registers: Registers, get: () -> UByte) {
         val term = get()
         val value = registers.a
-        val newValue = registers.a.plus(term).toUByte()
+        val newValue = registers.a.minus(term).toUByte()
 
         registers.a = newValue
         registers.f.apply {
             zero = (newValue.toUInt() == 0u)
-            subtract = false
-            halfCarry = isAdditionHalfCarry(value, term)
-            carry = (newValue < term)
+            subtract = true
+            halfCarry = isSubtractionHalfCarry(value, term)
+            carry = (newValue > term)
         }
     }
 
     override fun execute() {
         when (target) {
-            R8.A -> add(registers, registers::a::get)
-            R8.B -> add(registers, registers::b::get)
-            R8.C -> add(registers, registers::c::get)
-            R8.D -> add(registers, registers::d::get)
-            R8.E -> add(registers, registers::e::get)
-            R8.H -> add(registers, registers::h::get)
-            R8.L -> add(registers, registers::l::get)
+            R8.A -> sub(registers, registers::a::get)
+            R8.B -> sub(registers, registers::b::get)
+            R8.C -> sub(registers, registers::c::get)
+            R8.D -> sub(registers, registers::d::get)
+            R8.E -> sub(registers, registers::e::get)
+            R8.H -> sub(registers, registers::h::get)
+            R8.L -> sub(registers, registers::l::get)
             else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 

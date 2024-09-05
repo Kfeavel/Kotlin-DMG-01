@@ -64,26 +64,26 @@ interface Instruction {
                     opcode.matchesMask(0b00001111u, 0b00001001u) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, 0b00110000u, 4))
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
-                        return INCr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                        return INCar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     opcode.matchesMask(0b00000111u, 0b00000101u) ->
-                        return DECr8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
+                        return DECar8(registers, R8.fromOpcode(opcode, 0b00111000u, 3))
                     // Block 2 (8-bit arithmetic)
                     opcode.matchesMask(0b11111000u, 0b10000000u) ->
-                        return ADDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return ADDar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b1001000u) ->
-                        return ADCr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return ADCar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10010000u) ->
-                        return SUBr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return SUBar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10011000u) ->
-                        return SBCr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return SBCar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10100000u) ->
-                        return ANDr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return ANDar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10101000u) ->
-                        return XORr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return XORar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10110000u) ->
-                        return ORr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return ORar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     opcode.matchesMask(0b11111000u, 0b10111000u) ->
-                        return CPr8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
+                        return CPar8(registers, R8.fromOpcode(opcode, 0b00000111u, 0))
                     else -> throw IllegalStateException("Unknown opcode (0x${opcode.toHexString()})")
                 }
             }
