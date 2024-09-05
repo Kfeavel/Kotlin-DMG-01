@@ -61,6 +61,8 @@ interface Instruction {
                 // Complex instructions
                 else -> when {
                     // Block 0
+                    opcode.matchesMask(LDr16imm16.mask, LDr16imm16.opcode) ->
+                        return LDr16imm16(registers, bus, R16.fromOpcode(opcode, LDr16imm16.register, 4))
                     opcode.matchesMask(0b00001111u, 0b00001001u) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, 0b00110000u, 4))
                     opcode.matchesMask(0b00000111u, 0b00000100u) ->
