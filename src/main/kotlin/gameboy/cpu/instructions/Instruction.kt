@@ -68,6 +68,8 @@ interface Instruction {
 
                     opcode.matchesMask(INCr16.mask, INCr16.opcode) ->
                         return INCr16(registers, R16.fromOpcode(opcode, INCr16.register, 4))
+                    opcode.matchesMask(DECr16.mask, DECr16.opcode) ->
+                        return DECr16(registers, R16.fromOpcode(opcode, DECr16.register, 4))
                     opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, ADDhlr16.register, 4))
 
