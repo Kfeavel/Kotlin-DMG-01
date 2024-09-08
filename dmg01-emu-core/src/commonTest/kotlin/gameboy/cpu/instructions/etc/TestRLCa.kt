@@ -24,7 +24,7 @@ class TestRLCa {
             a = 0b10101010u,
         )
         RLCa(registers).execute()
-        assertEquals(registers.a, 0b01010100u)
+        assertEquals(registers.a, 0b01010101u)
         assertEquals(registers.f.zero, false)
         assertEquals(registers.f.subtract, false)
         assertEquals(registers.f.halfCarry, false)
@@ -34,13 +34,13 @@ class TestRLCa {
     @Test
     fun `Test Rotate Left Carry Zero Flag`() {
         val registers = Registers(
-            a = 0b10000000u,
+            a = 0b00000000u,
         )
         RLCa(registers).execute()
         assertEquals(registers.a, 0b00000000u)
         assertEquals(registers.f.zero, true)
         assertEquals(registers.f.subtract, false)
         assertEquals(registers.f.halfCarry, false)
-        assertEquals(registers.f.carry, true)
+        assertEquals(registers.f.carry, false)
     }
 }

@@ -24,7 +24,7 @@ class TestRLCr8 {
             b = 0b10101010u,
         )
         RLCr8(registers, R8.B).execute()
-        assertEquals(registers.b, 0b01010100u)
+        assertEquals(registers.b, 0b01010101u)
         assertEquals(false, registers.f.zero)
         assertEquals(false, registers.f.subtract)
         assertEquals(false, registers.f.halfCarry)
@@ -34,13 +34,13 @@ class TestRLCr8 {
     @Test
     fun `Test Rotate Left Carry Zero Flag`() {
         val registers = Registers(
-            b = 0b10000000u,
+            b = 0b00000000u,
         )
         RLCr8(registers, R8.B).execute()
         assertEquals(registers.b, 0b00000000u)
         assertEquals(true, registers.f.zero)
         assertEquals(false, registers.f.subtract)
         assertEquals(false, registers.f.halfCarry)
-        assertEquals(true, registers.f.carry)
+        assertEquals(false, registers.f.carry)
     }
 }

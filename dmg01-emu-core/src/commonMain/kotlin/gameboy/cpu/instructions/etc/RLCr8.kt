@@ -17,9 +17,12 @@ open class RLCr8(
     }
 
     private fun rotateLeftCarry(register: KMutableProperty0<UByte>) {
+        // FIXME: There HAS to be a simpler way to write this.
         val value = register.get()
         val msb: UByte = value and 0b10000000u
-        val newValue = (value.toUInt() shl 1).toUByte()
+        val msbIsSet = (msb.compareTo(0b10000000u) == 0)
+        val newValue = ((value.toUInt() shl 1) or if (msbIsSet) 0b00000001u else 0u).toUByte()
+
         register.set(newValue)
 
         registers.f.apply {
