@@ -3,6 +3,7 @@ package gameboy.cpu.instructions
 import gameboy.cpu.instructions.arithmetic.*
 import gameboy.cpu.instructions.etc.RLCa
 import gameboy.cpu.instructions.etc.RLCr8
+import gameboy.cpu.instructions.etc.RLa
 import gameboy.cpu.instructions.etc.RLr8
 import gameboy.cpu.instructions.load.LDr16imm16
 import gameboy.cpu.instructions.load.LDr8imm8
@@ -86,6 +87,8 @@ interface Instruction {
                         )
                     opcode.matchesMask(RLCa.mask, RLCa.opcode) ->
                         return RLCa(registers)
+                    opcode.matchesMask(RLa.mask, RLa.opcode) ->
+                        return RLa(registers)
                     opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->
                         return ADDhlr16(registers, R16.fromOpcode(opcode, ADDhlr16.register, 4))
 
