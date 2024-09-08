@@ -11,7 +11,7 @@ class TestINCr8 {
         val registers = Registers(
             b = 0x0Bu
         ).apply {
-            INCr8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0x0Cu, registers.b)
     }
@@ -21,7 +21,7 @@ class TestINCr8 {
         val registers = Registers(
             b = 0xFFu
         ).apply {
-            INCr8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -31,7 +31,7 @@ class TestINCr8 {
         val registers = Registers(
             b = 0x00u
         ).apply {
-            INCr8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -41,7 +41,7 @@ class TestINCr8 {
         val registers = Registers(
             b = 0x0Fu
         ).apply {
-            INCr8(registers = this, target = R8.B).execute()
+            INCr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }

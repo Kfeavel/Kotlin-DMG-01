@@ -12,7 +12,7 @@ class TestSUBar8 {
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            SUBar8(registers = this, target = R8.B).execute()
+            SUBar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0x95u, registers.a)
     }
@@ -23,7 +23,7 @@ class TestSUBar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SUBar8(registers = this, target = R8.B).execute()
+            SUBar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -34,7 +34,7 @@ class TestSUBar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            SUBar8(registers = this, target = R8.B).execute()
+            SUBar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.subtract)
     }
@@ -45,7 +45,7 @@ class TestSUBar8 {
             a = 0x10u,
             b = 0x01u
         ).apply {
-            SUBar8(registers = this, target = R8.B).execute()
+            SUBar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -56,7 +56,7 @@ class TestSUBar8 {
             a = 0x00u,
             c = 0x01u
         ).apply {
-            SUBar8(registers = this, target = R8.C).execute()
+            SUBar8(registers = this, dest = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }

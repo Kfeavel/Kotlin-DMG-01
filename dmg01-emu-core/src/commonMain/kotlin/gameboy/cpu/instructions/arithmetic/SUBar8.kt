@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class SUBar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     /**
      * Underflowing subtraction
@@ -26,7 +26,7 @@ class SUBar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> sub(registers, registers::a::get)
             R8.B -> sub(registers, registers::b::get)
             R8.C -> sub(registers, registers::c::get)
@@ -40,5 +40,5 @@ class SUBar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

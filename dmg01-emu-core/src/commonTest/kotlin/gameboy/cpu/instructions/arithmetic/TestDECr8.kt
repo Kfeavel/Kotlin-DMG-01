@@ -11,7 +11,7 @@ class TestDECr8 {
         val registers = Registers(
             b = 0xFFu
         ).apply {
-            DECr8(registers = this, target = R8.B).execute()
+            DECr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0xFEu, registers.b)
     }
@@ -21,7 +21,7 @@ class TestDECr8 {
         val registers = Registers(
             b = 0x01u
         ).apply {
-            DECr8(registers = this, target = R8.B).execute()
+            DECr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -31,7 +31,7 @@ class TestDECr8 {
         val registers = Registers(
             b = 0x01u
         ).apply {
-            DECr8(registers = this, target = R8.B).execute()
+            DECr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.subtract)
     }
@@ -41,7 +41,7 @@ class TestDECr8 {
         val registers = Registers(
             b = 0xF0u
         ).apply {
-            DECr8(registers = this, target = R8.B).execute()
+            DECr8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0x0EFu, registers.b)
         assertEquals(true, registers.f.halfCarry)

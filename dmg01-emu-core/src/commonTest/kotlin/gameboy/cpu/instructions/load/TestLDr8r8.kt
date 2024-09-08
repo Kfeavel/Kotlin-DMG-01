@@ -17,7 +17,7 @@ class TestLDr8r8 {
             bus = MemoryBus(),
         )
         assertTrue(ldr8r8 is LDr8r8)
-        assertEquals(R8.A, ldr8r8.target)
+        assertEquals(R8.A, ldr8r8.dest)
         assertEquals(R8.B, ldr8r8.source)
     }
 

@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class ADCar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     /**
      * Overflowing add with carry
@@ -28,7 +28,7 @@ class ADCar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> addWithCarry(registers, registers::a::get)
             R8.B -> addWithCarry(registers, registers::b::get)
             R8.C -> addWithCarry(registers, registers::c::get)
@@ -42,5 +42,5 @@ class ADCar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

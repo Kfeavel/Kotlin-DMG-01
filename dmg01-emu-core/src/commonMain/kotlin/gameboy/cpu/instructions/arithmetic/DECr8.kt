@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class DECr8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     private fun dec(
         registers: Registers,
@@ -24,7 +24,7 @@ class DECr8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> dec(registers, registers::a::get, registers::a::set)
             R8.B -> dec(registers, registers::b::get, registers::b::set)
             R8.C -> dec(registers, registers::c::get, registers::c::set)
@@ -38,5 +38,5 @@ class DECr8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

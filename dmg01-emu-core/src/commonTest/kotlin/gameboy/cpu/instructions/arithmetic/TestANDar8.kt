@@ -12,7 +12,7 @@ class TestANDar8 {
             a = 0xABu,
             b = 0xFFu
         ).apply {
-            ANDar8(registers = this, target = R8.B).execute()
+            ANDar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
@@ -23,7 +23,7 @@ class TestANDar8 {
             a = 0xF0u,
             b = 0x0Fu
         ).apply {
-            ANDar8(registers = this, target = R8.B).execute()
+            ANDar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -31,7 +31,7 @@ class TestANDar8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers().apply {
-            ANDar8(registers = this, target = R8.B).execute()
+            ANDar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -39,7 +39,7 @@ class TestANDar8 {
     @Test
     fun `Test Half Carry`() {
         val registers = Registers().apply {
-            ANDar8(registers = this, target = R8.B).execute()
+            ANDar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -47,7 +47,7 @@ class TestANDar8 {
     @Test
     fun `Test Carry`() {
         val registers = Registers().apply {
-            ANDar8(registers = this, target = R8.C).execute()
+            ANDar8(registers = this, dest = R8.C).execute()
         }
         assertEquals(false, registers.f.carry)
     }

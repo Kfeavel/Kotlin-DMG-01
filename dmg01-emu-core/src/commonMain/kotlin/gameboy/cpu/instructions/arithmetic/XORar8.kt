@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class XORar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     private fun xor(registers: Registers, get: () -> UByte) {
         val newValue = registers.a xor get()
@@ -21,7 +21,7 @@ class XORar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> xor(registers, registers::a::get)
             R8.B -> xor(registers, registers::b::get)
             R8.C -> xor(registers, registers::c::get)
@@ -35,5 +35,5 @@ class XORar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

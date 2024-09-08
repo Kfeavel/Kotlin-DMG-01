@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class SBCar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     /**
      * Underflowing subtraction with carry
@@ -28,7 +28,7 @@ class SBCar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> subWithCarry(registers, registers::a::get)
             R8.B -> subWithCarry(registers, registers::b::get)
             R8.C -> subWithCarry(registers, registers::c::get)
@@ -42,5 +42,5 @@ class SBCar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

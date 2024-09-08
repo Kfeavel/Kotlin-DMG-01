@@ -17,14 +17,14 @@ class TestADDhlr16 {
             bus = MemoryBus(),
         )
         assertTrue(addr16hl is ADDhlr16)
-        assertEquals(R16.DE, addr16hl.target)
+        assertEquals(R16.DE, addr16hl.dest)
     }
 
     @Test
     fun `Test Add`() {
         val registers = Registers().apply {
             bc = 0xBBCCu
-            ADDhlr16(registers = this, target = R16.BC).execute()
+            ADDhlr16(registers = this, dest = R16.BC).execute()
         }
         assertEquals(0xBBCCu, registers.hl)
     }
@@ -32,7 +32,7 @@ class TestADDhlr16 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers().apply {
-            ADDhlr16(registers = this, target = R16.BC).execute()
+            ADDhlr16(registers = this, dest = R16.BC).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -42,7 +42,7 @@ class TestADDhlr16 {
         val registers = Registers().apply {
             de = 0x0001u
             hl = 0x00FFu
-            ADDhlr16(registers = this, target = R16.DE).execute()
+            ADDhlr16(registers = this, dest = R16.DE).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -52,7 +52,7 @@ class TestADDhlr16 {
         val registers = Registers().apply {
             de = 0xFFFFu
             hl = 0x0001u
-            ADDhlr16(registers = this, target = R16.DE).execute()
+            ADDhlr16(registers = this, dest = R16.DE).execute()
         }
         assertEquals(true, registers.f.carry)
     }

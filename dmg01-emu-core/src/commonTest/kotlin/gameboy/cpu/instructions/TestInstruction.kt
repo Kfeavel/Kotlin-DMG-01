@@ -67,7 +67,7 @@ class TestInstruction {
             bus = bus,
         )
         assertTrue(incr8a is INCr8)
-        assertEquals(R8.H, incr8a.target)
+        assertEquals(R8.H, incr8a.dest)
 
         val addr8a = Instruction.fromByte(
             opcode = 0x80u,
@@ -75,6 +75,6 @@ class TestInstruction {
             bus = bus,
         )
         assertTrue(addr8a is ADDar8)
-        assertEquals(R8.B, addr8a.target)
+        assertEquals(R8.B, addr8a.dest)
     }
 }

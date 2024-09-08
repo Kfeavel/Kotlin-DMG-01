@@ -16,7 +16,7 @@ class TestADCar8 {
                 carry = true
             )
         ).apply {
-            ADCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0xACu, registers.a)
     }
@@ -27,7 +27,7 @@ class TestADCar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -41,7 +41,7 @@ class TestADCar8 {
                 carry = true
             )
         ).apply {
-            ADCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.zero)
     }
@@ -52,7 +52,7 @@ class TestADCar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ADCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -66,7 +66,7 @@ class TestADCar8 {
                 carry = true
             )
         ).apply {
-            ADCar8(registers = this, target = R8.B).execute()
+            ADCar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.halfCarry)
     }
@@ -80,7 +80,7 @@ class TestADCar8 {
                 carry = true
             )
         ).apply {
-            ADCar8(registers = this, target = R8.C).execute()
+            ADCar8(registers = this, dest = R8.C).execute()
         }
         assertEquals(true, registers.f.carry)
     }

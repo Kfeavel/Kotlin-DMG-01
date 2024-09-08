@@ -17,7 +17,7 @@ class TestLDr16imm16 {
             bus = MemoryBus(),
         )
         assertTrue(ldr16imm16 is LDr16imm16)
-        assertEquals(R16.DE, ldr16imm16.target)
+        assertEquals(R16.DE, ldr16imm16.dest)
     }
 
     @Test

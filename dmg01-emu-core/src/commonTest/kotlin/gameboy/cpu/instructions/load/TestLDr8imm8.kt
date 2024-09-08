@@ -17,7 +17,7 @@ class TestLDr8imm8 {
             bus = MemoryBus(),
         )
         assertTrue(ldr8imm8 is LDr8imm8)
-        assertEquals(R8.D, ldr8imm8.target)
+        assertEquals(R8.D, ldr8imm8.dest)
     }
 
     @Test

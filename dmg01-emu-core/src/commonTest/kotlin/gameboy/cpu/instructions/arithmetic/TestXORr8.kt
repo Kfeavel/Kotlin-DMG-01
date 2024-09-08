@@ -12,7 +12,7 @@ class TestXXORar8 {
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
@@ -23,7 +23,7 @@ class TestXXORar8 {
             a = 0xFFu,
             b = 0xABu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0x54u, registers.a)
     }
@@ -34,7 +34,7 @@ class TestXXORar8 {
             a = 0x0Bu,
             b = 0x0Bu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -45,7 +45,7 @@ class TestXXORar8 {
             a = 0xF0u,
             b = 0x0Fu
         ).apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.zero)
     }
@@ -53,7 +53,7 @@ class TestXXORar8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -61,7 +61,7 @@ class TestXXORar8 {
     @Test
     fun `Test Half Carry`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.B).execute()
+            XORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.halfCarry)
     }
@@ -69,7 +69,7 @@ class TestXXORar8 {
     @Test
     fun `Test Carry`() {
         val registers = Registers().apply {
-            XORar8(registers = this, target = R8.C).execute()
+            XORar8(registers = this, dest = R8.C).execute()
         }
         assertEquals(false, registers.f.carry)
     }

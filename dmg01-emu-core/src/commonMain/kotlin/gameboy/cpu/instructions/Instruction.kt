@@ -74,7 +74,7 @@ interface Instruction {
                     opcode.matchesMask(LDr8r8.mask, LDr8r8.opcode) ->
                         return LDr8r8(
                             registers,
-                            target = R8.fromOpcode(opcode, LDr8r8.registerTarget, 3),
+                            dest = R8.fromOpcode(opcode, LDr8r8.registerTarget, 3),
                             source = R8.fromOpcode(opcode, LDr8r8.registerSource, 0),
                         )
                     opcode.matchesMask(ADDhlr16.mask, ADDhlr16.opcode) ->

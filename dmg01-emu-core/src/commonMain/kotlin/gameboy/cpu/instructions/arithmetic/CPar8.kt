@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class CPar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     /**
      * Subtracts from the 8-bit A register, the 8-bit register r, and updates flags based on the result.
@@ -26,7 +26,7 @@ class CPar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> cp(registers, registers::a::get)
             R8.B -> cp(registers, registers::b::get)
             R8.C -> cp(registers, registers::c::get)
@@ -40,5 +40,5 @@ class CPar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

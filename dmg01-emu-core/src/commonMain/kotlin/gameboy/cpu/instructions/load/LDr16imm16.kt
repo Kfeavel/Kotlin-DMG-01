@@ -9,7 +9,7 @@ import gameboy.memory.MemoryBus
 class LDr16imm16(
     override val registers: Registers,
     internal val bus: MemoryBus,
-    internal val target: R16,
+    internal val dest: R16,
 ) : Instruction {
     companion object : InstructionBitmasks {
         override val mask: UByte = 0b11001111u
@@ -26,7 +26,7 @@ class LDr16imm16(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R16.BC -> load(registers, bus, registers::bc::set)
             R16.DE -> load(registers, bus, registers::de::set)
             R16.HL -> load(registers, bus, registers::hl::set)
@@ -36,5 +36,5 @@ class LDr16imm16(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

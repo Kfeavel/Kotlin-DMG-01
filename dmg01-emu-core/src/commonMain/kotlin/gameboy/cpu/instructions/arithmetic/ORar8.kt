@@ -6,7 +6,7 @@ import gameboy.cpu.registers.Registers
 
 class ORar8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     private fun or(registers: Registers, get: () -> UByte) {
         val newValue = registers.a or get()
@@ -21,7 +21,7 @@ class ORar8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> or(registers, registers::a::get)
             R8.B -> or(registers, registers::b::get)
             R8.C -> or(registers, registers::c::get)
@@ -35,5 +35,5 @@ class ORar8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

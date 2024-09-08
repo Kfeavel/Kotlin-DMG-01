@@ -7,7 +7,7 @@ import gameboy.cpu.registers.Registers
 
 class LDr8r8(
     override val registers: Registers,
-    internal val target: R8,
+    internal val dest: R8,
     internal val source: R8,
 ) : Instruction {
     companion object : InstructionBitmasks {
@@ -37,7 +37,7 @@ class LDr8r8(
             else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 
-        val set = when (target) {
+        val set = when (dest) {
             R8.A -> registers::a::set
             R8.B -> registers::b::set
             R8.C -> registers::c::set
@@ -52,5 +52,5 @@ class LDr8r8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

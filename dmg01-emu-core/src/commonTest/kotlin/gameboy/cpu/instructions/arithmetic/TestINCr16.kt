@@ -17,14 +17,14 @@ class TestINCr16 {
             bus = MemoryBus(),
         )
         assertTrue(incr16 is INCr16)
-        assertEquals(R16.DE, incr16.target)
+        assertEquals(R16.DE, incr16.dest)
     }
 
     @Test
     fun `Test Increment`() {
         val registers = Registers().apply {
             bc = 0xAABBu
-            INCr16(registers = this, target = R16.BC).execute()
+            INCr16(registers = this, dest = R16.BC).execute()
         }
         assertEquals(0xAABCu, registers.bc)
     }

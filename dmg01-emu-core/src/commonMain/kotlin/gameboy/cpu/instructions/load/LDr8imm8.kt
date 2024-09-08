@@ -9,7 +9,7 @@ import gameboy.memory.MemoryBus
 class LDr8imm8(
     override val registers: Registers,
     internal val bus: MemoryBus,
-    internal val target: R8,
+    internal val dest: R8,
 ) : Instruction {
     companion object : InstructionBitmasks {
         override val mask: UByte = 0b11000111u
@@ -24,7 +24,7 @@ class LDr8imm8(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R8.A -> load(registers, bus, registers::a::set)
             R8.B -> load(registers, bus, registers::b::set)
             R8.C -> load(registers, bus, registers::c::set)
@@ -38,5 +38,5 @@ class LDr8imm8(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }

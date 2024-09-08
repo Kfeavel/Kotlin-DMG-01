@@ -12,7 +12,7 @@ class TestORar8 {
             a = 0xA0u,
             b = 0x0Bu
         ).apply {
-            ORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(0xABu, registers.a)
     }
@@ -23,7 +23,7 @@ class TestORar8 {
             a = 0x00u,
             b = 0x00u
         ).apply {
-            ORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(true, registers.f.zero)
     }
@@ -34,7 +34,7 @@ class TestORar8 {
             a = 0xF0u,
             b = 0x0Fu
         ).apply {
-            ORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.zero)
     }
@@ -42,7 +42,7 @@ class TestORar8 {
     @Test
     fun `Test Subtract Flag`() {
         val registers = Registers().apply {
-            ORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.subtract)
     }
@@ -50,7 +50,7 @@ class TestORar8 {
     @Test
     fun `Test Half Carry`() {
         val registers = Registers().apply {
-            ORar8(registers = this, target = R8.B).execute()
+            ORar8(registers = this, dest = R8.B).execute()
         }
         assertEquals(false, registers.f.halfCarry)
     }
@@ -58,7 +58,7 @@ class TestORar8 {
     @Test
     fun `Test Carry`() {
         val registers = Registers().apply {
-            ORar8(registers = this, target = R8.C).execute()
+            ORar8(registers = this, dest = R8.C).execute()
         }
         assertEquals(false, registers.f.carry)
     }

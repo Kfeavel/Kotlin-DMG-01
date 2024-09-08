@@ -7,7 +7,7 @@ import gameboy.cpu.registers.Registers
 
 class ADDhlr16(
     override val registers: Registers,
-    internal val target: R16,
+    internal val dest: R16,
 ) : Instruction {
     companion object : InstructionBitmasks {
         override val mask: UByte = 0b11001111u
@@ -32,7 +32,7 @@ class ADDhlr16(
     }
 
     override fun execute() {
-        when (target) {
+        when (dest) {
             R16.BC -> add(registers, registers::bc::get)
             R16.DE -> add(registers, registers::de::get)
             R16.HL -> add(registers, registers::hl::get)
@@ -42,5 +42,5 @@ class ADDhlr16(
         registers.pc++
     }
 
-    override fun toString() = "${this::class.simpleName} $target"
+    override fun toString() = "${this::class.simpleName} $dest"
 }
