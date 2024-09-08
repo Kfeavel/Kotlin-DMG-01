@@ -2,7 +2,6 @@ package gameboy.cpu
 
 import gameboy.cpu.exceptions.HaltException
 import gameboy.cpu.registers.Registers
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -51,11 +50,15 @@ class TestCPU {
 
         cpu.bus.memory.addAll(0, instructions)
 
-        assertThrows<HaltException> {
+        var didHalt = false
+        try {
             repeat(instructions.size) {
                 cpu.step()
             }
+        } catch (e: HaltException) {
+            didHalt = true
         }
+        assertEquals(true, didHalt)
 
         // Only PC should have changed between NOP and HALT
         // NOP will increment PC but HALT will not, so we should have one less

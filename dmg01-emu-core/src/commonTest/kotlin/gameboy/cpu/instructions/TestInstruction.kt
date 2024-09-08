@@ -5,7 +5,6 @@ import gameboy.cpu.instructions.arithmetic.INCr8
 import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import gameboy.memory.MemoryBus
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,13 +24,18 @@ class TestInstruction {
     @Test
     fun `Prefixed Opcode Decoding`() {
         // TODO: Add actual tests once prefixed instructions are added
-        assertThrows<IllegalStateException> {
+        var didThrow = false
+        try {
             Instruction.fromByte(
                 opcode = 0xCBu,
                 registers = registers,
                 bus = bus,
             )
+        } catch (e: IllegalStateException) {
+            didThrow = true
         }
+
+        assertEquals(true, didThrow)
     }
 
     @Test
