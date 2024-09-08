@@ -2,6 +2,7 @@ package gameboy.cpu.instructions
 
 import gameboy.cpu.instructions.arithmetic.*
 import gameboy.cpu.instructions.etc.RLCa
+import gameboy.cpu.instructions.etc.RLCr8
 import gameboy.cpu.instructions.load.LDr16imm16
 import gameboy.cpu.instructions.load.LDr8imm8
 import gameboy.cpu.instructions.load.LDr8r8
@@ -26,11 +27,13 @@ interface Instruction {
             return ((this and mask) == result)
         }
 
-        private fun fromByteWithPrefix(
+        internal fun fromByteWithPrefix(
             opcode: UByte,
             registers: Registers,
         ): Instruction {
-            return when (opcode.toInt()) {
+            when {
+                opcode.matchesMask(RLCr8.mask, RLCr8.opcode) ->
+                    return RLCr8(registers, R8.fromOpcode(opcode, RLCr8.register, 0))
                 else -> throw IllegalStateException("Unknown opcode ($opcode)")
             }
         }
