@@ -7,4 +7,5 @@ References:
  - https://gekkio.fi/files/gb-docs/gbctr.pdf
  - https://gbdev.io/pandocs/
  - https://gbdev.io/gb-opcodes/optables/
+ - https://rgbds.gbdev.io/docs/v0.8.0/gbz80.7
  - https://gist.github.com/SonoSooS/c0055300670d678b5ae8433e20bea595#cb-prefix
