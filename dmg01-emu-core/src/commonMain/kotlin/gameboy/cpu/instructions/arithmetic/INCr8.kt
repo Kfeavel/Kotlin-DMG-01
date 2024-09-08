@@ -9,9 +9,7 @@ class INCr8(
     override val registers: Registers,
     internal val dest: R8,
 ) : Instruction {
-    private fun inc(
-        register: KMutableProperty0<UByte>
-    ) {
+    private fun inc(register: KMutableProperty0<UByte>) {
         val value = register.get()
         val sum = value.inc()
         register.set(sum)

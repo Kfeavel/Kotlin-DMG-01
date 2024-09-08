@@ -3,6 +3,7 @@ package gameboy.cpu.instructions
 import gameboy.cpu.instructions.arithmetic.*
 import gameboy.cpu.instructions.etc.RLCa
 import gameboy.cpu.instructions.etc.RLCr8
+import gameboy.cpu.instructions.etc.RLr8
 import gameboy.cpu.instructions.load.LDr16imm16
 import gameboy.cpu.instructions.load.LDr8imm8
 import gameboy.cpu.instructions.load.LDr8r8
@@ -34,6 +35,8 @@ interface Instruction {
             when {
                 opcode.matchesMask(RLCr8.mask, RLCr8.opcode) ->
                     return RLCr8(registers, R8.fromOpcode(opcode, RLCr8.register, 0))
+                opcode.matchesMask(RLr8.mask, RLr8.opcode) ->
+                    return RLr8(registers, R8.fromOpcode(opcode, RLr8.register, 0))
                 else -> throw IllegalStateException("Unknown opcode ($opcode)")
             }
         }

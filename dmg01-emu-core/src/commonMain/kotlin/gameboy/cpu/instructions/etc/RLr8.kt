@@ -6,20 +6,20 @@ import gameboy.cpu.registers.R8
 import gameboy.cpu.registers.Registers
 import kotlin.reflect.KMutableProperty0
 
-open class RLCr8(
+open class RLr8(
     override val registers: Registers,
     internal val dest: R8,
 ) : Instruction {
     companion object : InstructionBitmasks {
         // This is an 0xCB prefixed instruction.
         override val mask: UByte = 0b11111000u
-        override val opcode: UByte = 0b00000000u
+        override val opcode: UByte = 0b00010000u
     }
 
-    private fun rotateLeftCarry(register: KMutableProperty0<UByte>) {
+    private fun rotateLeft(register: KMutableProperty0<UByte>) {
         val value = register.get()
         val msb = (value and 0b10000000u).toUInt() shr 7
-        val newValue = ((value.toUInt() shl 1) or msb).toUByte()
+        val newValue = (value.toUInt() shl 1).toUByte()
 
         register.set(newValue)
 
@@ -43,7 +43,7 @@ open class RLCr8(
             else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 
-        rotateLeftCarry(register)
+        rotateLeft(register)
         registers.pc++
     }
 
