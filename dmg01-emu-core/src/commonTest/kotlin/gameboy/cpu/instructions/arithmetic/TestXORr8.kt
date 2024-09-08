@@ -5,7 +5,7 @@ import gameboy.cpu.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestXXORar8 {
+class TestXORr8 {
     @Test
     fun `Test XOR`() {
         val registers = Registers(

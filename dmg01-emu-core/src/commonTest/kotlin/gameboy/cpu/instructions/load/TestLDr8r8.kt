@@ -22,7 +22,7 @@ class TestLDr8r8 {
     }
 
     @Test
-    fun `Test u8 Immediate Load`() {
+    fun `Test u8 Register Load`() {
         val registers = Registers(
             b = 0xBBu,
         )
