@@ -24,17 +24,18 @@ class INCr8(
     }
 
     override fun execute() {
-        when (dest) {
-            R8.A -> inc(registers, registers::a::get, registers::a::set)
-            R8.B -> inc(registers, registers::b::get, registers::b::set)
-            R8.C -> inc(registers, registers::c::get, registers::c::set)
-            R8.D -> inc(registers, registers::d::get, registers::d::set)
-            R8.E -> inc(registers, registers::e::get, registers::e::set)
-            R8.H -> inc(registers, registers::h::get, registers::h::set)
-            R8.L -> inc(registers, registers::l::get, registers::l::set)
+        val register = when (dest) {
+            R8.A -> registers::a
+            R8.B -> registers::b
+            R8.C -> registers::c
+            R8.D -> registers::d
+            R8.E -> registers::e
+            R8.H -> registers::h
+            R8.L -> registers::l
             else -> throw IllegalStateException("Invalid R8 register for '${this::class.simpleName}'")
         }
 
+        inc(registers, register::get, register::set)
         registers.pc++
     }
 
